@@ -23,32 +23,32 @@ export class CLogin {
   login: LogIn = { email: '', contrasenya: '' };
   error: string = '';
 
-  // constructor(
-  //   private fb: FormBuilder,
-  //   private loginService: LoginService,
-  //   private router: Router
-  // ) {}
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private router: Router
+  ) { }
 
-  // ngOnInit() {
-  //   this.initForms();
-  // }
+  ngOnInit() {
+    this.initForms();
+  }
 
-  // initForms() {
-  //   this.loginForm = this.fb.group({
-  //     usuario: ['', Validators.required],
-  //     contraseña: ['', Validators.required],
-  //   });
-  // }
+  initForms() {
+    this.loginForm = this.fb.group({
+      usuario: ['', Validators.required],
+      contraseña: ['', Validators.required],
+    });
+  }
 
-  // onSubmitLogin() {
-  //   this.loginService.logIn(this.login).subscribe({
-  //     next: () => {
-  //       this.error = '';
-  //       this.router.navigate(['/inicio']);
-  //     },
-  //     error: (err) => {
-  //       this.error = err.error?.message;
-  //     },
-  //   });
-  // }
+  onSubmitLogin() {
+    this.loginService.logIn(this.login).subscribe({
+      next: () => {
+        this.error = '';
+        this.router.navigate(['/inicio']);
+      },
+      error: (error) => {
+        this.error = error.error?.message;
+      },
+    });
+  }
 }

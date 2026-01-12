@@ -7,18 +7,16 @@ import { map, Observable, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class LoginService {
+  constructor(private http: HttpClient) { }
+
   private apiUrl = 'http://localhost:8080/auth';
 
-  // constructor(private http: HttpClient) {}
-  // getRol():Observable<Rol>{
-  //   return this.http.get<Rol>(this.apiUrl + '/rol');
-  // }
-  // logIn(credentials: LogIn): Observable<void> {
-  //   return this.http.post<{ token: string }>(this.apiUrl + '/login', credentials).pipe(
-  //     tap((response) => {
-  //       localStorage.setItem('token', response.token);
-  //     }),
-  //     map(() => {})
-  //   );
-  //}
+  logIn(credentials: LogIn): Observable<void> {
+    return this.http.post<{ token: string }>(this.apiUrl + '/login', credentials).pipe(
+      tap((response) => {
+        localStorage.setItem('token', response.token);
+      }),
+      map(() => { })
+    );
+  }
 }

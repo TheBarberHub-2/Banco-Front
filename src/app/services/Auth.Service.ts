@@ -7,11 +7,12 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8080/api/auth/login'; 
-  constructor(private http: HttpClient, private router: Router) {}
+  private apiUrl = 'http://localhost:8080/api/auth/login';
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(credentials: any) {
-    return this.http.post<any>(this.apiUrl, credentials);
+    return this.http.post<any>(this.apiUrl, credentials); //Aqui devolveria el token que me da el backend a traves de la api y el metodo
   }
 
   setToken(token: string) {

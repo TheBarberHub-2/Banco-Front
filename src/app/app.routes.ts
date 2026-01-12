@@ -19,12 +19,12 @@ export const routes: Routes = [
     {
         path: 'inicio',
         component: Inicio,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
     },
     {
         path: 'cerrar-sesion',
         component: CCerrarSesion,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
     },
 
     {
