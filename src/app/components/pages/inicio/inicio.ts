@@ -1,40 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CPanel } from '../../ui/c-panel/c-panel';
+import { CuentasService } from '../../../services/Cuentas.Service';
+import { TarjetaService } from '../../../services/Tarjeta.Service';
+import { cuentaBancaria } from '../../../models/cuenta-bancaria/cuentaBancaria';
+import { tarjetaCredito } from '../../../models/tarjeta-credito/tarjeta-credito';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [CPanel],
+  imports: [CPanel, CommonModule],
   templateUrl: './inicio.html',
   styleUrl: './inicio.scss',
 })
-export class Inicio {
-  peluqueriasCount: number = 0;
-  categoriasCount: number = 0;
-  usuariosCount: number = 0;
-  productosCount: number = 0;
+export class Inicio implements OnInit {
+  cuentas: cuentaBancaria[] = [];
+  tarjetas: tarjetaCredito[] = [];
 
-  // constructor(
-  //   private peluqueriasService: PeluqueriasService,
-  //   private categoriasService: CategoriasService,
-  //   private usuariosService: UsuariosService,
-  //   private productosService: ProductosService
-  // ) {}
+  constructor(
+    private cuentasService: CuentasService,
+    private tarjetaService: TarjetaService
+  ) { }
 
-  // ngOnInit() {
-  //   this.peluqueriasService.getPeluquerias().subscribe((data) => {
-  //     this.peluqueriasCount = data.totalElements;
-  //   });
+  ngOnInit() {
+    this.cuentasService.getCuentas().subscribe((data) => {
+      this.cuentas = data;
+    });
 
-  //   this.categoriasService.getCategorias().subscribe((data) => {
-  //     this.categoriasCount = data.totalElements;
-  //   });
-
-  //   this.usuariosService.getUsuarios().subscribe((data) => {
-  //     this.usuariosCount = data.totalElements;
-  //   });
-  //   this.productosService.getProductos().subscribe((data) => {
-  //     this.productosCount = data.taotalElements;
-  //   });
-  // }
+    this.tarjetaService.getTarjetas().subscribe((data) => {
+      this.tarjetas = data;
+    });
+  }
 }

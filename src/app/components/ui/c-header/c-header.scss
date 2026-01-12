@@ -1,89 +1,76 @@
 .c-header {
-
-    --c-header-color-fondo: var(--bh-color-gris-4);
-    --c-header-color-superficie: var(--bh-color-gris-1);
-    --c-header-color-texto-primario: var(--bh-color-gris-9);
-    --c-header-color-texto-secundario: var(--bh-color-gris-1);
-    --c-header-color-acento: var(--bh-color-gris-1);
+    --c-header-bg: #ffffff;
+    --c-header-text: var(--bh-color-azul-2);
+    --c-header-link: var(--bh-color-gris-3);
+    --c-header-link-hover: var(--bh-color-azul-2);
 
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--bh-espacio-4) var(--bh-espacio-8);
-    background-color: var(--c-header-color-superficie);
-    box-shadow: var(--bh-sombra-2);
+    padding: var(--bh-espacio-4) var(--bh-espacio-10);
+    background-color: var(--c-header-bg);
+    border-bottom: 1px solid var(--bh-color-gris-8);
     position: sticky;
     top: 0;
-    z-index: var(--bh-z-3);
+    z-index: 1000;
 
-    // Elemento: Brand Name
     &__brand-name {
+        font-family: 'Outfit', sans-serif;
         font-size: var(--bh-texto-6);
-        font-weight: var(--bh-peso-5);
-        color: var(--c-header-color-texto-primario);
+        font-weight: 700;
+        color: var(--c-header-text);
         margin: 0;
-        letter-spacing: -0.5px;
+        letter-spacing: -0.03em;
         cursor: pointer;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        &::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background-color: var(--bh-color-azul-2);
+            border-radius: 2px;
+            transform: rotate(45deg);
+        }
     }
 
-    // Elemento: Nav (lista de navegación)
     &__nav {
         display: flex;
         align-items: center;
-        gap: var(--bh-espacio-6);
+        gap: var(--bh-espacio-8);
         list-style: none;
         margin: 0;
         padding: 0;
     }
 
-    // Elemento: Item (cada elemento de la lista)
-    &__item {
-
-        // Modificador: Highlight
-        &--highlight {
-            background-color: var(--bh-color-gris-3);
-            padding: var(--bh-espacio-3) var(--bh-espacio-5);
-            border-radius: var(--bh-radio-3);
-        }
-    }
-
-    // Elemento: Link
     &__link {
-        color: var(--c-header-color-texto-primario);
+        color: var(--c-header-link);
         text-decoration: none;
-        font-size: var(--bh-texto-3);
-        font-weight: var(--bh-peso-3);
-        transition: color var(--bh-transicion-1);
-        position: relative;
+        font-size: var(--bh-texto-2);
+        font-weight: 500;
+        transition: all 0.2s ease;
+        padding: 8px 12px;
+        border-radius: 6px;
 
-        // Efecto hover
         &:hover {
-            color: var(--bh-color-gris-8);
-        }
-
-        // Underline animado
-        &::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--bh-color-acento);
-            transition: width var(--bh-transicion-2);
-        }
-
-        &:hover::after {
-            width: 100%;
+            color: var(--c-header-link-hover);
+            background-color: var(--bh-color-gris-9);
         }
     }
 
-    // Elemento: Highlight (span de pedidos)
-    &__highlight {
-        color: var(--bh-color-texto-primario);
-        font-size: var(--bh-texto-2);
-        font-weight: var(--bh-peso-4);
-        white-space: nowrap;
+    &__item--highlight {
+        .c-header__link {
+            background-color: var(--bh-color-azul-2);
+            color: #ffffff;
+
+            &:hover {
+                background-color: var(--bh-color-azul-3);
+                color: #ffffff;
+            }
+        }
     }
 }
 

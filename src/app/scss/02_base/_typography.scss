@@ -2,6 +2,8 @@
 // Add your typography styles here
 
 body {
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     line-height: 1.5;
+    background-color: var(--bh-color-gris-9); // Light grayish background (#F3F4F6)
+    color: var(--bh-color-gris-1); // Dark primary text
 }

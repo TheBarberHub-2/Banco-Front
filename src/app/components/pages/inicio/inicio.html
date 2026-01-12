@@ -1,6 +1,20 @@
 <div class="bh-inicio">
-  <panel titulo="Peluquerias" [numero]="peluqueriasCount"></panel>
-  <panel titulo="Categorías" [numero]="categoriasCount"></panel>
-  <panel titulo="Usuarios" [numero]="usuariosCount"></panel>
-  <panel titulo="Productos" [numero]="productosCount"></panel>
+  <section class="bh-inicio__section">
+    <h2 class="bh-inicio__section-title">Cuentas Bancarias</h2>
+    <div class="bh-inicio__grid">
+      @for(cuenta of cuentas; track cuenta.id) {
+      <panel [titulo]="'Cuenta'" [numero]="cuenta.saldo" [info]="cuenta.iban" [routerLinkVer]="'/cuentas/' + cuenta.id">
+      </panel>
+      }
+    </div>
+  </section>
+
+  <section class="bh-inicio__section">
+    <h2 class="bh-inicio__section-title">Tarjetas de Crédito</h2>
+    <div class="bh-inicio__grid">
+      @for(tarjeta of tarjetas; track tarjeta.id) {
+      <panel [titulo]="'Tarjeta'" [info]="tarjeta.numeroTarjeta" [routerLinkVer]="'/tarjetas/' + tarjeta.id"></panel>
+      }
+    </div>
+  </section>
 </div>

@@ -2,94 +2,71 @@
 // Siguiendo metodología BEM y usando variables globales
 
 .c-footer {
-    --c-footer-color-fondo: var(--bh-color-gris-4);
-    --c-footer-color-superficie: var(--bh-color-gris-1);
-    --c-footer-color-texto-primario: var(--bh-color-gris-9);
-    --c-footer-color-texto-secundario: var(--bh-color-gris-1);
+    --c-footer-bg: #ffffff;
+    --c-footer-text: var(--bh-color-gris-3);
+    --c-footer-border: var(--bh-color-gris-8);
 
-
-    background-color: var(--c-footer-color-superficie);
-    color: var(--c-footer-color-texto-primario);
-    padding: var(--bh-p-9) var(--bh-p-7);
-    text-align: center;
-    box-shadow: var(--bh-sombra-2);
+    background-color: var(--c-footer-bg);
+    color: var(--c-footer-text);
+    padding: var(--bh-espacio-12) var(--bh-espacio-10);
+    text-align: left;
+    border-top: 1px solid var(--c-footer-border);
     margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--bh-espacio-6);
 
-    // Elemento: Copy (copyright)
     &__copy {
-        font-size: var(--bh-texto-2);
-        color: var(--c-footer-color-texto-primario);
-        margin: 0 0 var(--bh-m-5) 0;
-        font-weight: var(--bh-peso-2);
+        font-size: var(--bh-texto-1);
+        color: var(--bh-color-gris-4);
+        margin: 0;
+        font-weight: 400;
     }
 
-    // Elemento: Social (contenedor de redes sociales)
     &__social {
         display: flex;
-        justify-content: center;
-        gap: var(--bh-espacio-5);
-        margin-bottom: var(--bh-m-6);
+        gap: var(--bh-espacio-4);
     }
 
-    // Elemento: Social Link
     &__social-link {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 40px;
-        height: 40px;
-        border-radius: var(--bh-radio-8);
-        background-color: var(--bh-color-gris-3);
-        color: var(--c-footer-color-texto-primario);
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: var(--bh-color-gris-9);
+        color: var(--bh-color-azul-2);
         text-decoration: none;
-        font-size: var(--bh-texto-5);
-        transition: all var(--bh-transicion-2);
+        font-size: var(--bh-texto-3);
+        transition: all 0.2s ease;
 
-        // Hover effect
         &:hover {
-            background-color: var(--bh-color-gris-9);
-            color: var(--bh-color-gris-1);
-            transform: translateY(-3px);
-            box-shadow: var(--bh-sombra-3);
-        }
-
-        // Active effect
-        &:active {
-            transform: translateY(-1px);
+            background-color: var(--bh-color-azul-2);
+            color: #ffffff;
+            transform: translateY(-2px);
         }
     }
 
-    // Elemento: Links (contenedor de enlaces)
     &__links {
         display: flex;
-        justify-content: center;
-        gap: var(--bh-espacio-7);
-        flex-wrap: wrap;
+        gap: var(--bh-espacio-6);
+        list-style: none;
         margin: 0;
-        padding-top: var(--bh-p-5);
-        border-top: 1px solid var(--bh-color-gris-3);
+        padding: 0;
     }
 
-    // Elemento: Link
     &__link {
-        color: var(--bh-color-gris-8);
+        color: var(--bh-color-gris-3);
         text-decoration: none;
-        font-size: var(--bh-texto-2);
-        font-weight: var(--bh-peso-2);
-        transition: color var(--bh-transicion-1);
-        position: relative;
+        font-size: var(--bh-texto-1);
+        font-weight: 500;
+        transition: color 0.2s ease;
 
-        // Hover effect
         &:hover {
-            color: var(--bh-color-blanco);
-        }
-
-        // Separador entre enlaces (excepto el último)
-        &:not(:last-child)::after {
-            content: '|';
-            position: absolute;
-            right: calc(var(--bh-espacio-7) / -2);
-            color: var(--bh-color-gris-3);
+            color: var(--bh-color-azul-2);
         }
     }
 }
