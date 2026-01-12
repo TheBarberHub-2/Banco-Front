@@ -1,0 +1,65 @@
+{
+  "clientes": [
+    { "id": 1, "nombre": "Alejandro", "apellido1": "García", "apellido2": "López", "dni": "12345678A", "descripcion": "Cliente preferente" },
+    { "id": 2, "nombre": "María", "apellido1": "Sánchez", "apellido2": "Pérez", "dni": "87654321B", "descripcion": "Nueva alta" },
+    { "id": 3, "nombre": "Javier", "apellido1": "Rodríguez", "apellido2": "Ruiz", "dni": "11223344C", "descripcion": "Empresa" },
+    { "id": 4, "nombre": "Lucía", "apellido1": "Fernández", "apellido2": "Gómez", "dni": "55667788D", "descripcion": "Cliente desde 2010" },
+    { "id": 5, "nombre": "Carlos", "apellido1": "Martín", "apellido2": "Sanz", "dni": "99887766E", "descripcion": "Incidencia abierta" }
+  ],
+  "tarjetasCredito": [
+    { "id": 1, "numeroTarjeta": "4532112233445566", "fechaExpiracion": "2026-12-31T23:59:59Z", "nombreTitular": "Alejandro García" },
+    { "id": 2, "numeroTarjeta": "5412887766554433", "fechaExpiracion": "2025-06-30T23:59:59Z", "nombreTitular": "María Sánchez" },
+    { "id": 3, "numeroTarjeta": "3782000011112222", "fechaExpiracion": "2027-03-15T23:59:59Z", "nombreTitular": "Javier Rodríguez" },
+    { "id": 4, "numeroTarjeta": "4000123456789012", "fechaExpiracion": "2024-09-20T23:59:59Z", "nombreTitular": "Lucía Fernández" },
+    { "id": 5, "numeroTarjeta": "5105998877665544", "fechaExpiracion": "2028-01-10T23:59:59Z", "nombreTitular": "Carlos Martín" }
+  ],
+  "cuentasBancarias": [
+    { "id": 1, "saldo": 1500.50, "iban": "ES2114650100722030876101" },
+    { "id": 2, "saldo": 250.00, "iban": "ES9121000418450200051332" },
+    { "id": 3, "saldo": 12450.75, "iban": "ES1520385778913000764122" },
+    { "id": 4, "saldo": -15.20, "iban": "ES3000491834132412345678" },
+    { "id": 5, "saldo": 5000.00, "iban": "ES4400810532290001234567" }
+  ],
+  "movimientosBancarios": [
+    {
+      "id": 1,
+      "fecha": "2024-03-01T10:30:00Z",
+      "concepto": "Nómina Marzo",
+      "importe": 2100.00,
+      "tipoMovimientoBancario": "INGRESO",
+      "origenMovimientoBancario": "TRANSFERENCIA"
+    },
+    {
+      "id": 2,
+      "fecha": "2024-03-02T14:15:00Z",
+      "concepto": "Pago Supermercado",
+      "importe": -65.40,
+      "tipoMovimientoBancario": "GASTO",
+      "origenMovimientoBancario": "TARJETA"
+    },
+    {
+      "id": 3,
+      "fecha": "2024-03-03T09:00:00Z",
+      "concepto": "Recibo Luz",
+      "importe": -85.00,
+      "tipoMovimientoBancario": "GASTO",
+      "origenMovimientoBancario": "DOMICILIACION"
+    },
+    {
+      "id": 4,
+      "fecha": "2024-03-04T18:45:00Z",
+      "concepto": "Bizum Cena",
+      "importe": 25.00,
+      "tipoMovimientoBancario": "INGRESO",
+      "origenMovimientoBancario": "TRANSFERENCIA_MOVIL"
+    },
+    {
+      "id": 5,
+      "fecha": "2024-03-05T11:20:00Z",
+      "concepto": "Retirada Cajero",
+      "importe": -50.00,
+      "tipoMovimientoBancario": "GASTO",
+      "origenMovimientoBancario": "CAJERO"
+    }
+  ]
+}
