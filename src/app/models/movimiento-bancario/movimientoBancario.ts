@@ -5,4 +5,5 @@ export interface movimientoBancario {
   concepto: string;
   fecha: string;
   tipo: 'DEBE' | 'HABER';
+  origen?: string;
 }

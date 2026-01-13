@@ -14,7 +14,7 @@
     <h2 class="bh-inicio__section-title">Tarjetas de Crédito</h2>
     <div class="bh-inicio__grid">
       @for(tarjeta of tarjetas; track tarjeta.numeroTarjeta) {
-      <panel [titulo]="'Tarjeta'" [info]="tarjeta.numeroTarjeta" [routerLinkVer]="'/tarjetas/' + tarjeta.numeroTarjeta">
+      <panel [titulo]="'Tarjeta'" [info]="'**** **** **** ' + tarjeta.numeroTarjeta.slice(-4)" [routerLinkVer]="'/tarjetas/' + tarjeta.numeroTarjeta">
       </panel>
       }
     </div>

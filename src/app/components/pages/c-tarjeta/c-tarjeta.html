@@ -19,15 +19,15 @@
             <div class="bh-cuenta-info">
                 <h1 class="bh-cuenta-info__title">Detalles de la Tarjeta</h1>
                 <p class="bh-cuenta-info__iban">{{ tarjeta.numeroTarjeta }}</p>
-                <p class="bh-cuenta-info__holder">Límite: <strong>{{ tarjeta.limite | number:'1.2-2' }}€</strong></p>
+                <p class="bh-cuenta-info__holder">Titular: <strong>{{ tarjeta.nombreCompleto }}</strong></p>
+                <p class="bh-cuenta-info__holder">Vencimiento: <strong>{{ tarjeta.fechaCaducidad }}</strong></p>
             </div>
             <div class="bh-cuenta-balance">
                 <span class="bh-cuenta-balance__label">Estado de la tarjeta</span>
                 <h2 class="bh-cuenta-balance__amount bh-cuenta-balance__amount--positive">
                     ACTIVA
                 </h2>
-                <p class="bh-cuenta-info__holder" style="text-align: right; margin-top: 4px;">Saldo: {{
-                    tarjeta.saldo | number:'1.2-2' }}€</p>
+                <p class="bh-cuenta-info__holder" style="text-align: right; margin-top: 4px;">CVC: {{ tarjeta.cvc }}</p>
             </div>
         </div>
     </header>

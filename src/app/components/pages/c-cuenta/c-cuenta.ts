@@ -8,6 +8,7 @@ import { TarjetaService } from '../../../services/Tarjeta.Service';
 import { movimientoBancario } from '../../../models/movimiento-bancario/movimientoBancario';
 import { TipoMovimientoBancario } from '../../../enums/tipo-movimiento-bancario';
 import { OrigenMovimientoBancario } from '../../../enums/origen-movimiento-bancario';
+import { AuthService } from '../../../services/Auth.Service';
 
 import { MovimientosService } from '../../../services/Movimientos.Service';
 
@@ -29,7 +30,8 @@ export class CCuenta implements OnInit {
     private route: ActivatedRoute,
     private cuentasService: CuentasService,
     private tarjetaService: TarjetaService,
-    private movimientosService: MovimientosService
+    private movimientosService: MovimientosService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -43,34 +45,60 @@ export class CCuenta implements OnInit {
     }
   }
 
-  fetchCuentaDetails(id: number) {
+  fetchCuentaDetails(cuentaId: number) {
     this.loading = true;
-    this.cuentasService.getCuentaById(id).subscribe({
-      next: (data: cuentaBancaria | undefined) => {
-        this.cuenta = data;
-        if (this.cuenta && this.cuenta.id) {
-          this.fetchMovimientos(this.cuenta.id);
-        } else if (this.cuenta && !this.cuenta.id) {
-          // If no ID but we have the account, maybe we can't fetch movements yet?
-          // Or the backend should be updated as noted in the prompt.
-          console.warn('Account found but no ID available for movements lookup.');
+    const login = this.authService.getLogin();
+    if (!login) {
+      this.error = 'Usuario no autenticado.';
+      this.loading = false;
+      return;
+    }
+
+    // Get client profile to get clienteId
+    this.cuentasService.getClienteProfile(login).subscribe({
+      next: (response: any) => {
+        const cliente = Array.isArray(response) ? response[0] : response;
+        if (cliente && cliente.id) {
+          // Get all accounts for this client
+          this.cuentasService.getCuentasByCliente(cliente.id).subscribe({
+            next: (cuentas: cuentaBancaria[]) => {
+              // Find the specific account by ID
+              const processedCuentas = Array.isArray(cuentas) ? cuentas : (cuentas as any).data || [];
+              this.cuenta = processedCuentas.find((c: cuentaBancaria) => c.id === cuentaId);
+              
+              if (this.cuenta && this.cuenta.id) {
+                this.fetchMovimientos(this.cuenta.id);
+              } else {
+                this.error = 'La cuenta solicitada no existe.';
+              }
+              this.loading = false;
+            },
+            error: (err: any) => {
+              console.error('Error fetching accounts:', err);
+              this.error = 'Error al cargar las cuentas.';
+              this.loading = false;
+            }
+          });
         } else {
-          this.error = 'La cuenta solicitada no existe.';
+          this.error = 'No se pudo obtener la información del cliente.';
+          this.loading = false;
         }
-        this.loading = false;
       },
       error: (err: any) => {
-        console.error('Error fetching account details:', err);
-        this.error = 'Error al cargar los detalles de la cuenta.';
+        console.error('Error fetching client profile:', err);
+        this.error = 'Error al cargar el perfil del cliente.';
         this.loading = false;
-      },
+      }
     });
   }
 
   fetchMovimientos(id: number) {
+    console.log('Fetching movements for cuenta:', id);
     this.movimientosService.getMovimientosByCuenta(id).subscribe({
-      next: (data: movimientoBancario[]) => {
-        this.movimientos = data;
+      next: (data: any) => {
+        console.log('Movements response:', data);
+        this.movimientos = Array.isArray(data) ? data : (data as any).data || [];
+        console.log('Processed movimientos:', this.movimientos);
       },
       error: (err: any) => {
         console.error('Error fetching movements:', err);
