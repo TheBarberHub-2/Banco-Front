@@ -1,4 +1,4 @@
 export enum TipoMovimientoBancario {
-  Ingreso = 'Ingreso',
-  Egreso = 'Egreso',
+  DEBE = 'DEBE',
+  HABER = 'HABER',
 }

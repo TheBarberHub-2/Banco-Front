@@ -9,6 +9,8 @@ import { movimientoBancario } from '../../../models/movimiento-bancario/movimien
 import { TipoMovimientoBancario } from '../../../enums/tipo-movimiento-bancario';
 import { OrigenMovimientoBancario } from '../../../enums/origen-movimiento-bancario';
 
+import { MovimientosService } from '../../../services/Movimientos.Service';
+
 @Component({
   selector: 'app-c-cuenta',
   standalone: true,
@@ -26,7 +28,8 @@ export class CCuenta implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private cuentasService: CuentasService,
-    private tarjetaService: TarjetaService
+    private tarjetaService: TarjetaService,
+    private movimientosService: MovimientosService
   ) { }
 
   ngOnInit() {
@@ -43,16 +46,20 @@ export class CCuenta implements OnInit {
   fetchCuentaDetails(id: number) {
     this.loading = true;
     this.cuentasService.getCuentaById(id).subscribe({
-      next: (data) => {
+      next: (data: cuentaBancaria | undefined) => {
         this.cuenta = data;
-        if (this.cuenta) {
-          this.fetchMovimientos();
+        if (this.cuenta && this.cuenta.id) {
+          this.fetchMovimientos(this.cuenta.id);
+        } else if (this.cuenta && !this.cuenta.id) {
+          // If no ID but we have the account, maybe we can't fetch movements yet?
+          // Or the backend should be updated as noted in the prompt.
+          console.warn('Account found but no ID available for movements lookup.');
         } else {
           this.error = 'La cuenta solicitada no existe.';
         }
         this.loading = false;
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error fetching account details:', err);
         this.error = 'Error al cargar los detalles de la cuenta.';
         this.loading = false;
@@ -60,13 +67,14 @@ export class CCuenta implements OnInit {
     });
   }
 
-  fetchMovimientos() {
-    // Para simplificar y como es mock, usaremos datos estáticos aquí
-    this.movimientos = [
-      { id: 1, fecha: new Date('2026-01-10'), concepto: 'Nómina Enero 2026', importe: 2500.00, tipoMovimientoBancario: TipoMovimientoBancario.Ingreso, origenMovimientoBancario: OrigenMovimientoBancario.Transferencia },
-      { id: 2, fecha: new Date('2026-01-11'), concepto: 'Pago Mercadona', importe: -45.20, tipoMovimientoBancario: TipoMovimientoBancario.Egreso, origenMovimientoBancario: OrigenMovimientoBancario.TarjetaBancaria },
-      { id: 3, fecha: new Date('2026-01-12'), concepto: 'Transferencia recibida', importe: 150.00, tipoMovimientoBancario: TipoMovimientoBancario.Ingreso, origenMovimientoBancario: OrigenMovimientoBancario.Transferencia },
-      { id: 4, fecha: new Date('2026-01-12'), concepto: 'Pago Netflix', importe: -17.99, tipoMovimientoBancario: TipoMovimientoBancario.Egreso, origenMovimientoBancario: OrigenMovimientoBancario.TarjetaBancaria }
-    ];
+  fetchMovimientos(id: number) {
+    this.movimientosService.getMovimientosByCuenta(id).subscribe({
+      next: (data: movimientoBancario[]) => {
+        this.movimientos = data;
+      },
+      error: (err: any) => {
+        console.error('Error fetching movements:', err);
+      }
+    });
   }
 }

@@ -1,6 +1,7 @@
 export interface tarjetaCredito {
     id: number;
     numeroTarjeta: string;
-    fechaExpiracion: Date;
-    nombreTitular: string;
+    limite: number;
+    saldo: number;
+    cuentaId: number;
 }

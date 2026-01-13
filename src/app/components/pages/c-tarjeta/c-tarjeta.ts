@@ -7,6 +7,8 @@ import { movimientoBancario } from '../../../models/movimiento-bancario/movimien
 import { TipoMovimientoBancario } from '../../../enums/tipo-movimiento-bancario';
 import { OrigenMovimientoBancario } from '../../../enums/origen-movimiento-bancario';
 
+import { MovimientosService } from '../../../services/Movimientos.Service';
+
 @Component({
   selector: 'app-c-tarjeta',
   standalone: true,
@@ -22,33 +24,34 @@ export class CTarjeta implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private tarjetaService: TarjetaService
+    private tarjetaService: TarjetaService,
+    private movimientosService: MovimientosService
   ) { }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      const tarjetaId = parseInt(id);
-      this.fetchTarjetaDetails(tarjetaId);
+      this.fetchTarjetaDetails(id);
     } else {
-      this.error = 'No se proporcionó un ID de tarjeta válido.';
+      this.error = 'No se proporcionó un número de tarjeta válido.';
       this.loading = false;
     }
   }
 
-  fetchTarjetaDetails(id: number) {
+  fetchTarjetaDetails(numeroTarjeta: string) {
     this.loading = true;
-    this.tarjetaService.getTarjetaById(id).subscribe({
-      next: (data) => {
+    this.tarjetaService.getTarjetaById(parseInt(numeroTarjeta)).subscribe({ // Assuming the backend still expects numeric internally or I should use string if it's the identifier. The guide says GET /api/tarjetas/{id}. If id is numeroTarjeta, then I use string. But usually id is numeric. However, numeroTarjeta is a string "XXXX-XXXX-...".
+      next: (data: tarjetaCredito | undefined) => {
         this.tarjeta = data;
         if (this.tarjeta) {
-          this.fetchMovimientos();
+          // Note: Spec 2.0 doesn't show movements by card, only by account.
+          // For now, if we don't have account ID, we don't fetch movements.
         } else {
           this.error = 'La tarjeta solicitada no existe.';
         }
         this.loading = false;
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error fetching card details:', err);
         this.error = 'Error al cargar los detalles de la tarjeta.';
         this.loading = false;
@@ -56,12 +59,14 @@ export class CTarjeta implements OnInit {
     });
   }
 
-  fetchMovimientos() {
-    this.movimientos = [
-      { id: 1, fecha: new Date('2026-01-08'), concepto: 'Compra Amazon', importe: -89.99, tipoMovimientoBancario: TipoMovimientoBancario.Egreso, origenMovimientoBancario: OrigenMovimientoBancario.TarjetaBancaria },
-      { id: 2, fecha: new Date('2026-01-09'), concepto: 'Gasolinera Repsol', importe: -60.00, tipoMovimientoBancario: TipoMovimientoBancario.Egreso, origenMovimientoBancario: OrigenMovimientoBancario.TarjetaBancaria },
-      { id: 3, fecha: new Date('2026-01-10'), concepto: 'Restaurante El Pescador', importe: -120.50, tipoMovimientoBancario: TipoMovimientoBancario.Egreso, origenMovimientoBancario: OrigenMovimientoBancario.TarjetaBancaria },
-      { id: 4, fecha: new Date('2026-01-11'), concepto: 'Devolución suscripción', importe: 12.99, tipoMovimientoBancario: TipoMovimientoBancario.Ingreso, origenMovimientoBancario: OrigenMovimientoBancario.TarjetaBancaria }
-    ];
+  fetchMovimientos(cuentaId: number) {
+    this.movimientosService.getMovimientosByCuenta(cuentaId).subscribe({
+      next: (data: movimientoBancario[]) => {
+        this.movimientos = data;
+      },
+      error: (err: any) => {
+        console.error('Error fetching movements:', err);
+      }
+    });
   }
 }

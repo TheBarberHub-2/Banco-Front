@@ -1,6 +1,6 @@
 export interface cuentaBancaria {
-  nombreTitular: string;
   id: number;
+  numeroCuenta: string;
   saldo: number;
-  iban: string;
+  clienteId: number;
 }

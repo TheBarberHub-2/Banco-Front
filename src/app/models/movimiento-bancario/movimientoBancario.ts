@@ -1,11 +1,8 @@
-import { TipoMovimientoBancario } from "../../enums/tipo-movimiento-bancario";
-import { OrigenMovimientoBancario } from "../../enums/origen-movimiento-bancario";
-
 export interface movimientoBancario {
   id: number;
-  fecha: Date
-  concepto: string;
+  cuentaId: number;
   importe: number;
-  tipoMovimientoBancario: TipoMovimientoBancario;
-  origenMovimientoBancario: OrigenMovimientoBancario;
+  concepto: string;
+  fecha: string;
+  tipo: 'DEBE' | 'HABER';
 }

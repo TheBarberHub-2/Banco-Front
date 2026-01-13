@@ -1,5 +1,5 @@
 export enum OrigenMovimientoBancario {
-    Transferencia = 'Transferencia',
-    Domiciliacion = 'Domiciliacion',
-    TarjetaBancaria = 'TarjetaBancaria',
+    TRANSFERENCIA = 'TRANSFERENCIA',
+    TARJETA_BANCARIA = 'TARJETA_BANCARIA',
+    CAJERO = 'CAJERO',
 }

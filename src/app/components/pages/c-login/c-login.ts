@@ -20,7 +20,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CLogin {
   loginForm!: FormGroup;
-  login: LogIn = { usuario: '', contrasenya: '' };
+  login: LogIn = { login: '', password: '' };
   error: string = '';
 
   constructor(
@@ -35,8 +35,8 @@ export class CLogin {
 
   initForms() {
     this.loginForm = this.fb.group({
-      usuario: ['', Validators.required],
-      contrasenya: ['', Validators.required],
+      login: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 

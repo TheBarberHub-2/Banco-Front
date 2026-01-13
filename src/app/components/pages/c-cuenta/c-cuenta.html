@@ -13,8 +13,7 @@
         <div class="bh-cuenta-header__main">
             <div class="bh-cuenta-info">
                 <h1 class="bh-cuenta-info__title">Detalles de la Cuenta</h1>
-                <p class="bh-cuenta-info__iban">{{ cuenta.iban }}</p>
-                <p class="bh-cuenta-info__holder">Titular: <strong>{{ cuenta.nombreTitular }}</strong></p>
+                <p class="bh-cuenta-resumen__iban bh--font-medium">{{ cuenta.numeroCuenta }}</p>
             </div>
             <div class="bh-cuenta-balance">
                 <span class="bh-cuenta-balance__label">Saldo disponible</span>
@@ -30,7 +29,7 @@
         <section class="bh-movimientos">
             <h3 class="bh-movimientos__title">Últimos Movimientos</h3>
             <div class="bh-movimientos__list">
-                @for (m of movimientos; track m.id) {
+                @for (m of movimientos; track $index) {
                 <div class="bh-movimiento">
                     <div class="bh-movimiento__icon"
                         [ngClass]="{'bh-movimiento__icon--in': m.importe > 0, 'bh-movimiento__icon--out': m.importe <= 0}">

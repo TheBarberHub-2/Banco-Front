@@ -64,7 +64,8 @@
               "buildTarget": "front-banco:build:production"
             },
             "development": {
-              "buildTarget": "front-banco:build:development"
+              "buildTarget": "front-banco:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

@@ -2,17 +2,12 @@
   <h2>Login</h2>
   <form>
     <div class="form-group">
-      <input name="usuario" type="text" required [(ngModel)]="login.usuario" placeholder="Usuario" />
+      <input name="login" type="text" required [(ngModel)]="login.login" placeholder="Usuario" />
     </div>
     <div class="form-group">
-      <input
-        name="contrasenya"
-        type="password"
-        required
-        [(ngModel)]="login.contrasenya"
-        placeholder="Contraseña"
-      />
+      <input name="password" type="password" required [(ngModel)]="login.password" placeholder="Contraseña" />
     </div>
-    <button class="btn btn-primary bh--w-10 bh--p-4 bh--color-fondo-azul-5 bh--radio-1" (click)="onSubmitLogin()">Entrar</button>
+    <button class="btn btn-primary bh--w-10 bh--p-4 bh--color-fondo-azul-5 bh--radio-1"
+      (click)="onSubmitLogin()">Entrar</button>
   </form>
 </div>
