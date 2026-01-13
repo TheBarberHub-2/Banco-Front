@@ -1,0 +1,61 @@
+@if (loading) {
+<div class="bh-cuenta-loading">
+    <div class="bh-spinner"></div>
+    <p>Cargando detalles de la tarjeta...</p>
+</div>
+} @else if (error) {
+<div class="bh-cuenta-error">
+    <i class="bi bi-exclamation-triangle"></i>
+    <p>{{ error }}</p>
+    <button class="bh-action-btn" routerLink="/inicio">Volver al inicio</button>
+</div>
+} @else if (tarjeta) {
+<div class="bh-cuenta-container">
+    <header class="bh-cuenta-header">
+        <div class="bh-cuenta-header__back" routerLink="/inicio">
+            <i class="bi bi-arrow-left"></i> Volver a mis tarjetas
+        </div>
+        <div class="bh-cuenta-header__main">
+            <div class="bh-cuenta-info">
+                <h1 class="bh-cuenta-info__title">Detalles de la Tarjeta</h1>
+                <p class="bh-cuenta-info__iban">{{ tarjeta.numeroTarjeta }}</p>
+                <p class="bh-cuenta-info__holder">Titular: <strong>{{ tarjeta.nombreTitular }}</strong></p>
+            </div>
+            <div class="bh-cuenta-balance">
+                <span class="bh-cuenta-balance__label">Estado de la tarjeta</span>
+                <h2 class="bh-cuenta-balance__amount bh-cuenta-balance__amount--positive">
+                    ACTIVA
+                </h2>
+                <p class="bh-cuenta-info__holder" style="text-align: right; margin-top: 4px;">Vence: {{
+                    tarjeta.fechaExpiracion | date:'MM/yy' }}</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="bh-cuenta-content">
+        <section class="bh-movimientos">
+            <h3 class="bh-movimientos__title">Consumos Recientes</h3>
+            <div class="bh-movimientos__list">
+                @for (m of movimientos; track m.id) {
+                <div class="bh-movimiento">
+                    <div class="bh-movimiento__icon"
+                        [ngClass]="{'bh-movimiento__icon--in': m.importe > 0, 'bh-movimiento__icon--out': m.importe <= 0}">
+                        <i class="bi bi-credit-card"></i>
+                    </div>
+                    <div class="bh-movimiento__details">
+                        <span class="bh-movimiento__concept">{{ m.concepto }}</span>
+                        <span class="bh-movimiento__date">{{ m.fecha | date:'dd MMM yyyy' }}</span>
+                    </div>
+                    <div class="bh-movimiento__amount"
+                        [ngClass]="{'bh-movimiento__amount--positive': m.importe > 0, 'bh-movimiento__amount--negative': m.importe <= 0}">
+                        {{ m.importe | number:'1.2-2' }}€
+                    </div>
+                </div>
+                } @empty {
+                <div class="bh-no-movimientos">No hay consumos registrados para esta tarjeta.</div>
+                }
+            </div>
+        </section>
+    </main>
+</div>
+}
