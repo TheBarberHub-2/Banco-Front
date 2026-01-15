@@ -5,6 +5,7 @@ import { CCerrarSesion } from './components/pages/c-cerrar-sesion/c-cerrar-sesio
 import { AuthGuard } from './services/Auth.guard';
 import { CCuenta } from './components/pages/c-cuenta/c-cuenta';
 import { CTarjeta } from './components/pages/c-tarjeta/c-tarjeta';
+import { Transferencia } from './components/pages/transferencia/transferencia';
 
 export const routes: Routes = [
     {
@@ -31,6 +32,11 @@ export const routes: Routes = [
     {
         path: 'tarjetas/:id',
         component: CTarjeta,
+        // canActivate: [AuthGuard],
+    },
+    {
+        path: 'transferencia',
+        component: Transferencia,
         // canActivate: [AuthGuard],
     },
     {

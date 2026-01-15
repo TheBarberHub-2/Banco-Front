@@ -1,0 +1,181 @@
+.bh-transfer-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.bh-transfer-header {
+    margin-bottom: 2rem;
+
+    &__back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #666;
+        cursor: pointer;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        transition: color 0.2s;
+
+        &:hover {
+            color: #333;
+        }
+    }
+
+    &__title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin: 0;
+    }
+}
+
+.bh-transfer-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.bh-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.bh-form-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #444;
+}
+
+.bh-form-control {
+    padding: 0.8rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    }
+
+    &--invalid {
+        border-color: #dc3545;
+
+        &:focus {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+        }
+    }
+
+    &--readonly {
+        background-color: #f0f0f0;
+        cursor: not-allowed;
+        color: #555;
+        border-color: #ccc;
+    }
+}
+
+.bh-form-error {
+    font-size: 0.8rem;
+    color: #dc3545;
+}
+
+.bh-transfer-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.bh-btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    font-size: 1rem;
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    &--primary {
+        background-color: #007bff;
+        color: white;
+
+        &:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+    }
+
+    &--secondary {
+        background-color: #e9ecef;
+        color: #495057;
+
+        &:hover:not(:disabled) {
+            background-color: #dee2e6;
+        }
+    }
+}
+
+.bh-alert {
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+
+    p {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+
+    &--success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    &--error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+}
+
+.bh-spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: bh-spin 0.8s linear infinite;
+    margin-right: 0.5rem;
+}
+
+@keyframes bh-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.bh-form-static-text {
+    padding: 0.8rem 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 1.1rem;
+    color: #495057;
+    font-weight: 600;
+}

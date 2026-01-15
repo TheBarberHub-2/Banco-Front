@@ -51,7 +51,8 @@
         </section>
 
         <aside class="bh-cuenta-actions">
-            <button class="bh-action-btn">
+            <button class="bh-action-btn" [routerLink]="['/transferencia']"
+                [queryParams]="{numeroCuenta: cuenta.numeroCuenta}">
                 <i class="bi bi-send"></i>
                 <span>Realizar Transferencia</span>
             </button>

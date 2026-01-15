@@ -1,0 +1,86 @@
+<div class="bh-transfer-container">
+    <header class="bh-transfer-header">
+        <div class="bh-transfer-header__back" routerLink="/inicio">
+            <i class="bi bi-arrow-left"></i> Volver al inicio
+        </div>
+        <h1 class="bh-transfer-header__title">Nueva Transferencia</h1>
+    </header>
+
+    <main class="bh-transfer-content">
+        @if (successMessage) {
+        <div class="bh-alert bh-alert--success">
+            <i class="bi bi-check-circle-fill"></i>
+            <p>{{ successMessage }}</p>
+        </div>
+        }
+
+        @if (errorMessage) {
+        <div class="bh-alert bh-alert--error">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <p>{{ errorMessage }}</p>
+        </div>
+        }
+
+        <form [formGroup]="transferForm" (ngSubmit)="onSubmit()" class="bh-transfer-form">
+            <!-- Origen -->
+            <div class="bh-form-group">
+                <label class="bh-form-label">Cuenta de origen</label>
+                <div class="bh-form-static-text">
+                    <p>{{ iban }}</p>
+                </div>
+            </div>
+
+            <!-- Destino -->
+            <div class="bh-form-group">
+                <label for="destinoIban" class="bh-form-label">Número de cuenta destino (IBAN)</label>
+                <input type="text" id="destinoIban" formControlName="destinoIban" class="bh-form-control"
+                    placeholder="ES00 0000 0000 0000 0000 0000"
+                    [ngClass]="{'bh-form-control--invalid': transferForm.get('destinoIban')?.touched && transferForm.get('destinoIban')?.invalid}">
+                @if (transferForm.get('destinoIban')?.touched && transferForm.get('destinoIban')?.invalid) {
+                <span class="bh-form-error">Introduce un IBAN español válido (ES... y 22 dígitos).</span>
+                }
+            </div>
+
+            <!-- Importe -->
+            <div class="bh-form-group">
+                <label for="importe" class="bh-form-label">Importe (€)</label>
+                <input type="number" id="importe" formControlName="importe" class="bh-form-control" placeholder="0.00"
+                    step="0.01"
+                    [ngClass]="{'bh-form-control--invalid': transferForm.get('importe')?.touched && transferForm.get('importe')?.invalid}">
+                @if (transferForm.get('importe')?.touched && transferForm.get('importe')?.errors?.['required']) {
+                <span class="bh-form-error">El importe es obligatorio.</span>
+                }
+                @if (transferForm.get('importe')?.touched && transferForm.get('importe')?.errors?.['min']) {
+                <span class="bh-form-error">El importe mínimo es 0.01€.</span>
+                }
+            </div>
+
+            <!-- Concepto -->
+            <div class="bh-form-group">
+                <label for="concepto" class="bh-form-label">Concepto</label>
+                <input type="text" id="concepto" formControlName="concepto" class="bh-form-control"
+                    placeholder="Ej. Pago alquiler"
+                    [ngClass]="{'bh-form-control--invalid': transferForm.get('concepto')?.touched && transferForm.get('concepto')?.invalid}">
+                @if (transferForm.get('concepto')?.touched && transferForm.get('concepto')?.errors?.['required']) {
+                <span class="bh-form-error">El concepto es obligatorio.</span>
+                }
+                @if (transferForm.get('concepto')?.touched && transferForm.get('concepto')?.errors?.['minlength']) {
+                <span class="bh-form-error">El concepto debe tener al menos 3 caracteres.</span>
+                }
+            </div>
+
+            <div class="bh-transfer-actions">
+                <button type="button" class="bh-btn bh-btn--secondary" routerLink="/inicio" [disabled]="loading">
+                    Cancelar
+                </button>
+                <button type="submit" class="bh-btn bh-btn--primary" [disabled]="loading">
+                    @if (loading) {
+                    <span class="bh-spinner"></span> Procesando...
+                    } @else {
+                    Confirmar Transferencia
+                    }
+                </button>
+            </div>
+        </form>
+    </main>
+</div>
