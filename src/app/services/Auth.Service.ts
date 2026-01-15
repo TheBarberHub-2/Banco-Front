@@ -3,13 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private apiUrl = '/auth/login';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(credentials: any) {
     return this.http.post<any>(this.apiUrl, credentials); //Aqui devolveria el token que me da el backend a traves de la api y el metodo
@@ -27,8 +26,12 @@ export class AuthService {
     return localStorage.getItem('login');
   }
 
+  setApiToken(apiToken: string) {
+    localStorage.setItem('apiToken', apiToken);
+  }
+
   getApiToken(): string | null {
-    return localStorage.getItem('token');
+    return localStorage.getItem('apiToken');
   }
 
   logout() {
@@ -44,7 +47,7 @@ export class AuthService {
         localStorage.removeItem('token');
         localStorage.removeItem('login');
         this.router.navigate(['/login']);
-      }
+      },
     });
   }
 }

@@ -35,7 +35,6 @@ export class Transferencia implements OnInit {
     private route: ActivatedRoute
   ) {
     this.transferForm = this.fb.group({
-      origenIban: [this.iban, [Validators.required, Validators.pattern(this.ibanPattern)]],
       destinoIban: ['', [Validators.required, Validators.pattern(this.ibanPattern)]],
       importe: [null, [Validators.required, Validators.min(0.01)]],
       concepto: ['', [Validators.required, Validators.minLength(3)]],
@@ -106,7 +105,7 @@ export class Transferencia implements OnInit {
         api_token: apiToken,
       },
       origen: {
-        iban: formValue.origenIban,
+        iban: this.iban,
       },
       destino: {
         iban: formValue.destinoIban,

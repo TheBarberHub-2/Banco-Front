@@ -27,7 +27,7 @@ export class CLogin {
     private fb: FormBuilder,
     private loginService: LoginService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.initForms();

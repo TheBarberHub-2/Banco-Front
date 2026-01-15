@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LogIn } from '../models/login';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
+import { ClienteService } from './Cliente.Service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private clienteService: ClienteService) {}
 
   private apiUrl = '/auth';
 
@@ -17,7 +18,11 @@ export class LoginService {
         localStorage.setItem('token', response.token);
         localStorage.setItem('login', credentials.login);
       }),
-      map(() => { })
+      switchMap(() => this.clienteService.getApiTokenByLogin(credentials.login)),
+      tap((cliente) => {
+        localStorage.setItem('apiToken', cliente.apiToken);
+      }),
+      map(() => {})
     );
   }
 }

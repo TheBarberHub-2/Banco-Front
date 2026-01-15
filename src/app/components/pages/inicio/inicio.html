@@ -3,8 +3,12 @@
     <h2 class="bh-inicio__section-title">Cuentas Bancarias</h2>
     <div class="bh-inicio__grid">
       @for(cuenta of cuentas; track cuenta.id) {
-      <panel [titulo]="'Cuenta'" [numero]="cuenta.saldo" [info]="cuenta.numeroCuenta"
-        [routerLinkVer]="'/cuentas/' + cuenta.id">
+      <panel
+        [titulo]="'Cuenta'"
+        [numero]="cuenta.saldo"
+        [info]="cuenta.iban"
+        [routerLinkVer]="'/cuentas/' + cuenta.id"
+      >
       </panel>
       }
     </div>
@@ -14,7 +18,11 @@
     <h2 class="bh-inicio__section-title">Tarjetas de Crédito</h2>
     <div class="bh-inicio__grid">
       @for(tarjeta of tarjetas; track tarjeta.numeroTarjeta) {
-      <panel [titulo]="'Tarjeta'" [info]="'**** **** **** ' + tarjeta.numeroTarjeta.slice(-4)" [routerLinkVer]="'/tarjetas/' + tarjeta.numeroTarjeta">
+      <panel
+        [titulo]="'Tarjeta'"
+        [info]="'**** **** **** ' + tarjeta.numeroTarjeta.slice(-4)"
+        [routerLinkVer]="'/tarjetas/' + tarjeta.numeroTarjeta"
+      >
       </panel>
       }
     </div>
