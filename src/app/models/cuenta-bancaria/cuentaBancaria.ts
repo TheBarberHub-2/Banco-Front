@@ -1,6 +1,5 @@
 export interface cuentaBancaria {
   id: number;
-  numeroCuenta: string;
+  iban: string;
   saldo: number;
-  clienteId: number;
 }

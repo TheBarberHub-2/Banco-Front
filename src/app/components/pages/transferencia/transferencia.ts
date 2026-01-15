@@ -44,11 +44,8 @@ export class Transferencia implements OnInit {
 
   ngOnInit(): void {
     this.loadCuentas();
-    this.route.queryParams.subscribe(params => {
-      if (params['numeroCuenta']) {
-        this.iban = params['numeroCuenta'];
-        this.transferForm.get('origenIban')?.setValue(this.iban);
-      }
+    this.route.queryParams.subscribe((params) => {
+      this.iban = params['iban'];
     });
   }
 
@@ -72,20 +69,20 @@ export class Transferencia implements OnInit {
             next: (data: any) => {
               this.cuentas = Array.isArray(data) ? data : (data as any).data || [];
               if (!ibanParam && this.cuentas.length === 1) {
-                this.transferForm.patchValue({ origenIban: this.cuentas[0].numeroCuenta });
+                this.transferForm.patchValue({ origenIban: this.cuentas[0].iban });
               }
             },
             error: (err) => {
               console.error('Error loading accounts', err);
               this.errorMessage = 'Error al cargar tus cuentas.';
-            }
+            },
           });
         }
       },
       error: (err) => {
         console.error('Error loading profile', err);
         this.errorMessage = 'Error al obtener el perfil del cliente.';
-      }
+      },
     });
   }
 
@@ -106,18 +103,18 @@ export class Transferencia implements OnInit {
     const request: TransferenciaRequest = {
       autorizacion: {
         login: login,
-        api_token: apiToken
+        api_token: apiToken,
       },
       origen: {
-        iban: formValue.origenIban
+        iban: formValue.origenIban,
       },
       destino: {
-        iban: formValue.destinoIban
+        iban: formValue.destinoIban,
       },
       pago: {
         importe: formValue.importe,
-        concepto: formValue.concepto
-      }
+        concepto: formValue.concepto,
+      },
     };
 
     this.transferenciaService.procesarTransferencia(request).subscribe({
@@ -130,8 +127,11 @@ export class Transferencia implements OnInit {
         this.loading = false;
         console.error('Error processing transfer', err);
         // Extract diagnostic message from backend if available
-        this.errorMessage = err.error?.error || err.error?.message || 'Hubo un error al procesar la transferencia. Por favor, inténtalo de nuevo.';
-      }
+        this.errorMessage =
+          err.error?.error ||
+          err.error?.message ||
+          'Hubo un error al procesar la transferencia. Por favor, inténtalo de nuevo.';
+      },
     });
   }
 }

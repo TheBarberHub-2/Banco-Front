@@ -32,7 +32,7 @@ export class CCuenta implements OnInit {
     private tarjetaService: TarjetaService,
     private movimientosService: MovimientosService,
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -63,9 +63,11 @@ export class CCuenta implements OnInit {
           this.cuentasService.getCuentasByCliente(cliente.id).subscribe({
             next: (cuentas: cuentaBancaria[]) => {
               // Find the specific account by ID
-              const processedCuentas = Array.isArray(cuentas) ? cuentas : (cuentas as any).data || [];
+              const processedCuentas = Array.isArray(cuentas)
+                ? cuentas
+                : (cuentas as any).data || [];
               this.cuenta = processedCuentas.find((c: cuentaBancaria) => c.id === cuentaId);
-              
+
               if (this.cuenta && this.cuenta.id) {
                 this.fetchMovimientos(this.cuenta.id);
               } else {
@@ -77,7 +79,7 @@ export class CCuenta implements OnInit {
               console.error('Error fetching accounts:', err);
               this.error = 'Error al cargar las cuentas.';
               this.loading = false;
-            }
+            },
           });
         } else {
           this.error = 'No se pudo obtener la información del cliente.';
@@ -88,7 +90,7 @@ export class CCuenta implements OnInit {
         console.error('Error fetching client profile:', err);
         this.error = 'Error al cargar el perfil del cliente.';
         this.loading = false;
-      }
+      },
     });
   }
 
@@ -102,7 +104,7 @@ export class CCuenta implements OnInit {
       },
       error: (err: any) => {
         console.error('Error fetching movements:', err);
-      }
+      },
     });
   }
 }
