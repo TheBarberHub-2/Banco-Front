@@ -1,14 +1,13 @@
 .c-cerrar-sesion-container {
     --c-mod-container-height: var(--bh-altura-1);
     --c-mod-container-width: var(--bh-w-13);
-    --c-mod-container-color-fondo: var(--bh-color-gris-4);
-    --c-mod-container-color-superficie: var(--bh-color-gris-1);
-    --c-mod-container-color-texto-primario: var(--bh-color-texto-gris-9);
-    --c-mod-container-color-texto-secundario: var(--bh-color-texto-gris-1);
+    --c-mod-container-color-fondo: var(--bh-color-gris-9);
+    --c-mod-container-color-superficie: var(--bh-color-blanco);
+    --c-mod-container-color-texto-primario: var(--bh-color-azul-2);
+    --c-mod-container-color-texto-secundario: var(--bh-color-gris-5);
 
     background-color: var(--c-mod-container-color-fondo);
-
-    min-height: var(--c-mod-container-height);
+    min-height: 100vh;
     max-width: var(--c-mod-container-width);
     margin: 0 auto;
     padding: var(--bh-p-4);
@@ -43,11 +42,13 @@
             transition: all 0.2s ease;
 
             &.btn-submit {
-                background-color: var(--bh-color-error); // Red for logout
+                background-color: var(--bh-color-azul-5);
                 color: white;
 
                 &:hover {
-                    background-color: color-mix(in srgb, var(--bh-color-error), black 10%);
+                    background-color: var(--bh-color-azul-6);
+                    transform: translateY(-2px);
+                    box-shadow: var(--bh-sombra-2);
                 }
             }
 

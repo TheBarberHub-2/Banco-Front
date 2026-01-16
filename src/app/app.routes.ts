@@ -22,27 +22,27 @@ export const routes: Routes = [
     {
         path: 'inicio',
         component: Inicio,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
     },
     {
         path: 'cuentas/:id',
         component: CCuenta,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
     },
     {
         path: 'tarjetas/:id',
         component: CTarjeta,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
     },
     {
         path: 'transferencia',
         component: Transferencia,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
     },
     {
         path: 'cerrar-sesion',
         component: CCerrarSesion,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
     },
 
     {
