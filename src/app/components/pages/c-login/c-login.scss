@@ -1,20 +1,20 @@
 // Login Component Styles - BarberHub
 .form-wrapper {
-    --bh-inicio-color-fondo: var(--bh-color-gris-3);
+    --bh-inicio-color-fondo: var(--bh-color-gris-2);
     --bh-inicio-color-superficie: var(--bh-color-gris-1);
     --bh-inicio-color-texto-primario: var(--bh-color-gris-9);
     --bh-inicio-color-texto-secundario: var(--bh-color-gris-1);
     --bh-inicio-height: var(--bh-altura-12);
     --bh-inicio-width: var(--bh-w-9);
 
-    min-height: var(--bh-inicio-height);
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, var(--bh-color-gris-1) 0%, var(--bh-color-negro) 100%);
-    padding: var(--bh-espacio-6);
     background-color: var(--bh-inicio-color-fondo);
+    padding: var(--bh-espacio-6);
+    border-radius: 0;
 
     h2 {
         color: var(--bh-color-gris-9);
