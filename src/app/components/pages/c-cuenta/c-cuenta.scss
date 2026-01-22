@@ -98,7 +98,7 @@
 .bh-cuenta-content {
     display: grid;
     grid-template-columns: 1fr 320px;
-    gap: var(--bh-espacio-10);
+    gap: var(--bh-espacio-6);
     align-items: start;
 }
 
@@ -190,26 +190,19 @@
     }
 }
 
+.bh-cuenta-content {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: var(--bh-espacio-10);
+    align-items: start;
+}
+
 .bh-cuenta-actions {
     background-color: var(--bh-color-azul-2);
     border-radius: 16px;
     padding: var(--bh-espacio-8);
     color: #ffffff;
     box-shadow: 0 10px 30px rgba(0, 44, 81, 0.15);
-
-    &__title {
-        font-family: 'Outfit', sans-serif;
-        font-size: var(--bh-texto-3);
-        font-weight: 700;
-        margin-top: 0;
-        margin-bottom: var(--bh-espacio-6);
-    }
-
-    &__grid {
-        display: flex;
-        flex-direction: column;
-        gap: var(--bh-espacio-3);
-    }
 }
 
 .bh-action-btn {
@@ -225,6 +218,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
+    width: 100%;
 
     &:hover {
         background-color: #ffffff;
@@ -234,6 +228,49 @@
 
     i {
         font-size: 18px;
+    }
+}
+
+.bh-cuenta-cards-section {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: var(--bh-espacio-8);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--bh-color-gris-8);
+    margin-top: var(--bh-espacio-4);
+
+    &__title {
+        color: var(--bh-color-azul-2);
+        font-family: 'Outfit', sans-serif;
+        font-size: var(--bh-texto-4);
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: var(--bh-espacio-8);
+        padding-bottom: var(--bh-espacio-4);
+        border-bottom: 1px solid var(--bh-color-gris-8);
+    }
+}
+
+.bh-tarjetas-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--bh-espacio-6);
+
+    ::ng_deep .bh-panel {
+        margin: 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 1100px) {
+    .bh-tarjetas-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .bh-tarjetas-grid-4 {
+        grid-template-columns: 1fr;
     }
 }
 

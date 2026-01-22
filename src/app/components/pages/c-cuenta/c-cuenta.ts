@@ -11,11 +11,12 @@ import { OrigenMovimientoBancario } from '../../../enums/origen-movimiento-banca
 import { AuthService } from '../../../services/Auth.Service';
 
 import { MovimientosService } from '../../../services/Movimientos.Service';
+import { CPanel } from '../../ui/c-panel/c-panel';
 
 @Component({
   selector: 'app-c-cuenta',
   standalone: true,
-  imports: [CommonModule, DecimalPipe, RouterLink],
+  imports: [CommonModule, DecimalPipe, RouterLink, CPanel],
   templateUrl: './c-cuenta.html',
   styleUrl: './c-cuenta.scss',
 })
@@ -32,7 +33,7 @@ export class CCuenta implements OnInit {
     private tarjetaService: TarjetaService,
     private movimientosService: MovimientosService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -70,6 +71,7 @@ export class CCuenta implements OnInit {
 
               if (this.cuenta && this.cuenta.id) {
                 this.fetchMovimientos(this.cuenta.id);
+                this.fetchTarjetas(this.cuenta.id);
               } else {
                 this.error = 'La cuenta solicitada no existe.';
               }
@@ -104,6 +106,20 @@ export class CCuenta implements OnInit {
       },
       error: (err: any) => {
         console.error('Error fetching movements:', err);
+      },
+    });
+  }
+
+  fetchTarjetas(cuentaId: number) {
+    console.log('Fetching cards for account:', cuentaId);
+    this.tarjetaService.getTarjetasByCuentaId(cuentaId).subscribe({
+      next: (data: any) => {
+        console.log('Cards response:', data);
+        this.tarjetas = Array.isArray(data) ? data : (data as any).data || [];
+        console.log('Processed tarjetas:', this.tarjetas);
+      },
+      error: (err: any) => {
+        console.error('Error fetching cards:', err);
       },
     });
   }

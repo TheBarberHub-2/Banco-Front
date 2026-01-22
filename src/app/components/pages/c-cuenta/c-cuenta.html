@@ -17,13 +17,10 @@
       </div>
       <div class="bh-cuenta-balance">
         <span class="bh-cuenta-balance__label">Saldo disponible</span>
-        <h2
-          class="bh-cuenta-balance__amount"
-          [ngClass]="{
+        <h2 class="bh-cuenta-balance__amount" [ngClass]="{
             'bh-cuenta-balance__amount--positive': cuenta.saldo >= 0,
             'bh-cuenta-balance__amount--negative': cuenta.saldo < 0
-          }"
-        >
+          }">
           {{ cuenta.saldo | number : '1.2-2' }}€
         </h2>
       </div>
@@ -36,26 +33,20 @@
       <div class="bh-movimientos__list">
         @for (m of movimientos; track $index) {
         <div class="bh-movimiento">
-          <div
-            class="bh-movimiento__icon"
-            [ngClass]="{
+          <div class="bh-movimiento__icon" [ngClass]="{
               'bh-movimiento__icon--in': m.importe > 0,
               'bh-movimiento__icon--out': m.importe <= 0
-            }"
-          >
+            }">
             <i class="bi" [ngClass]="m.importe > 0 ? 'bi-plus' : 'bi-dash'"></i>
           </div>
           <div class="bh-movimiento__details">
             <span class="bh-movimiento__concept">{{ m.concepto }}</span>
             <span class="bh-movimiento__date">{{ m.fecha | date : 'dd MMM yyyy' }}</span>
           </div>
-          <div
-            class="bh-movimiento__amount"
-            [ngClass]="{
+          <div class="bh-movimiento__amount" [ngClass]="{
               'bh-movimiento__amount--positive': m.importe > 0,
               'bh-movimiento__amount--negative': m.importe <= 0
-            }"
-          >
+            }">
             {{ m.importe | number : '1.2-2' }}€
           </div>
         </div>
@@ -66,15 +57,24 @@
     </section>
 
     <aside class="bh-cuenta-actions">
-      <button
-        class="bh-action-btn"
-        [routerLink]="['/transferencia']"
-        [queryParams]="{ iban: cuenta.iban }"
-      >
+      <button class="bh-action-btn" [routerLink]="['/transferencia']" [queryParams]="{ iban: cuenta.iban }">
         <i class="bi bi-send"></i>
         <span>Realizar Transferencia</span>
       </button>
     </aside>
   </main>
+
+  @if (tarjetas.length > 0) {
+  <section class="bh-cuenta-cards-section">
+    <h3 class="bh-cuenta-cards-section__title">Tarjetas Asociadas</h3>
+    <div class="bh-tarjetas-grid-4">
+      @for(tarjeta of tarjetas; track tarjeta.numeroTarjeta) {
+      <panel [titulo]="'Tarjeta'" [info]="'**** **** **** ' + tarjeta.numeroTarjeta.slice(-4)"
+        [routerLinkVer]="'/tarjetas/' + tarjeta.numeroTarjeta">
+      </panel>
+      }
+    </div>
+  </section>
+  }
 </div>
 }
