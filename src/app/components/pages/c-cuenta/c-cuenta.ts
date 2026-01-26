@@ -6,8 +6,6 @@ import { CommonModule, DecimalPipe } from '@angular/common';
 import { CuentasService } from '../../../services/Cuentas.Service';
 import { TarjetaService } from '../../../services/Tarjeta.Service';
 import { movimientoBancario } from '../../../models/movimiento-bancario/movimientoBancario';
-import { TipoMovimientoBancario } from '../../../enums/tipo-movimiento-bancario';
-import { OrigenMovimientoBancario } from '../../../enums/origen-movimiento-bancario';
 import { AuthService } from '../../../services/Auth.Service';
 
 import { MovimientosService } from '../../../services/Movimientos.Service';
@@ -32,8 +30,8 @@ export class CCuenta implements OnInit {
     private cuentasService: CuentasService,
     private tarjetaService: TarjetaService,
     private movimientosService: MovimientosService,
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+  ) {}
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');

@@ -5,7 +5,6 @@ import { tarjetaCredito } from '../../../models/tarjeta-credito/tarjeta-credito'
 import { cuentaBancaria } from '../../../models/cuenta-bancaria/cuentaBancaria';
 import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 import { movimientoBancario } from '../../../models/movimiento-bancario/movimientoBancario';
-import { TipoMovimientoBancario } from '../../../enums/tipo-movimiento-bancario';
 import { OrigenMovimientoBancario } from '../../../enums/origen-movimiento-bancario';
 import { CuentasService } from '../../../services/Cuentas.Service';
 import { AuthService } from '../../../services/Auth.Service';
@@ -30,8 +29,8 @@ export class CTarjeta implements OnInit {
     private tarjetaService: TarjetaService,
     private cuentasService: CuentasService,
     private authService: AuthService,
-    private movimientosService: MovimientosService
-  ) { }
+    private movimientosService: MovimientosService,
+  ) {}
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -63,15 +62,17 @@ export class CTarjeta implements OnInit {
           this.cuentasService.getCuentasByCliente(cliente.id).subscribe({
             next: (cuentas: any) => {
               console.log('Accounts response:', cuentas);
-              const processedCuentas = Array.isArray(cuentas) ? cuentas : (cuentas as any).data || [];
+              const processedCuentas = Array.isArray(cuentas)
+                ? cuentas
+                : (cuentas as any).data || [];
               console.log('Processed accounts:', processedCuentas);
-              
+
               if (processedCuentas.length === 0) {
                 this.error = 'No se encontraron cuentas para este cliente.';
                 this.loading = false;
                 return;
               }
-              
+
               // Fetch cards for each account and find the specific card
               let accountsChecked = 0;
               processedCuentas.forEach((cuenta: cuentaBancaria) => {
@@ -81,22 +82,29 @@ export class CTarjeta implements OnInit {
                     next: (tarjetas: tarjetaCredito[]) => {
                       console.log(`Cards for account ${cuenta.id}:`, tarjetas);
                       accountsChecked++;
-                      
+
                       if (!this.tarjeta) {
-                        const processedTarjetas = Array.isArray(tarjetas) ? tarjetas : (tarjetas as any).data || [];
-                        const foundTarjeta = processedTarjetas.find((t: tarjetaCredito) => t.numeroTarjeta === tarjetaId);
-                        console.log(`Searching for tarjeta with numeroTarjeta: ${tarjetaId}, found:`, foundTarjeta);
-                        
+                        const processedTarjetas = Array.isArray(tarjetas)
+                          ? tarjetas
+                          : (tarjetas as any).data || [];
+                        const foundTarjeta = processedTarjetas.find(
+                          (t: tarjetaCredito) => t.numeroTarjeta === tarjetaId,
+                        );
+                        console.log(
+                          `Searching for tarjeta with numeroTarjeta: ${tarjetaId}, found:`,
+                          foundTarjeta,
+                        );
+
                         if (foundTarjeta) {
                           console.log('Card found:', foundTarjeta);
                           this.tarjeta = foundTarjeta;
                           // Fetch movements for this account
                           if (cuenta.id) {
-                            this.fetchMovimientos(cuenta.id);
+                            this.fetchMovimientos(foundTarjeta.id);
                           }
                         }
                       }
-                      
+
                       // When all accounts have been checked, finish loading
                       if (accountsChecked === processedCuentas.length) {
                         if (!this.tarjeta) {
@@ -114,7 +122,7 @@ export class CTarjeta implements OnInit {
                         }
                         this.loading = false;
                       }
-                    }
+                    },
                   });
                 } else {
                   accountsChecked++;
@@ -125,7 +133,7 @@ export class CTarjeta implements OnInit {
               console.error('Error fetching accounts:', err);
               this.error = 'Error al cargar las cuentas.';
               this.loading = false;
-            }
+            },
           });
         } else {
           this.error = 'No se pudo obtener la información del cliente.';
@@ -136,25 +144,21 @@ export class CTarjeta implements OnInit {
         console.error('Error fetching client profile:', err);
         this.error = 'Error al cargar el perfil del cliente.';
         this.loading = false;
-      }
+      },
     });
   }
 
-  fetchMovimientos(cuentaId: number) {
-    console.log('Fetching movements for tarjeta in cuenta:', cuentaId);
-    this.movimientosService.getMovimientosByCuenta(cuentaId).subscribe({
+  fetchMovimientos(id: number) {
+    console.log('Fetching movements for tarjeta:', id);
+    this.movimientosService.getMovimientosByTarjeta(id).subscribe({
       next: (data: any) => {
-        console.log('Movements response:', data);
-        const allMovimientos = Array.isArray(data) ? data : (data as any).data || [];
-        // Filter movements to show only those from tarjeta (credit card transactions)
-        this.movimientos = allMovimientos.filter((m: movimientoBancario) => 
-          m.origen === 'TARJETA_BANCARIA' || m.origen === OrigenMovimientoBancario.TARJETA_BANCARIA
-        );
-        console.log('Filtered movimientos for tarjeta:', this.movimientos);
+        console.log('Movements response: ', data);
+        this.movimientos = Array.isArray(data) ? data : (data as any).data || [];
+        console.log('Processed movimientos: ', this.movimientos);
       },
       error: (err: any) => {
         console.error('Error fetching movements:', err);
-      }
+      },
     });
   }
 }

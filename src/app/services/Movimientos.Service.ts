@@ -4,18 +4,22 @@ import { Observable } from 'rxjs';
 import { movimientoBancario } from '../models/movimiento-bancario/movimientoBancario';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class MovimientosService {
-    private apiUrl = '/api/movimientos';
+  private apiUrl = '/api/movimientos';
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-    getMovimientosByCuenta(cuentaId: number): Observable<movimientoBancario[]> {
-        return this.http.get<movimientoBancario[]>(`${this.apiUrl}/cuenta/${cuentaId}`);
-    }
+  getMovimientosByCuenta(cuentaId: number): Observable<movimientoBancario[]> {
+    return this.http.get<movimientoBancario[]>(`${this.apiUrl}/cuenta/${cuentaId}`);
+  }
 
-    getMovimientoById(id: number): Observable<movimientoBancario> {
-        return this.http.get<movimientoBancario>(`${this.apiUrl}/${id}`);
-    }
+  getMovimientosByTarjeta(tarjetaId: number): Observable<movimientoBancario[]> {
+    return this.http.get<movimientoBancario[]>(`${this.apiUrl}/tarjeta/${tarjetaId}`);
+  }
+
+  getMovimientoById(id: number): Observable<movimientoBancario> {
+    return this.http.get<movimientoBancario>(`${this.apiUrl}/${id}`);
+  }
 }
