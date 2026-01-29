@@ -7,7 +7,7 @@ import { tarjetaCredito } from '../models/tarjeta-credito/tarjeta-credito';
     providedIn: 'root'
 })
 export class TarjetaService {
-    private apiUrl = '/api/tarjetas';
+    private apiUrl = 'http://greatbank-back.producciondaw.cip.fpmislata.com/api/tarjetas';
 
     constructor(private http: HttpClient) { }
 

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class TranferenciaService {
-    private apiUrl = '/api/transferencia';
+    private apiUrl = 'http://greatbank-back.producciondaw.cip.fpmislata.com/api/transferencia';
 
     constructor(private http: HttpClient) { }
 

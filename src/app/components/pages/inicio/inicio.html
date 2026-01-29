@@ -19,7 +19,7 @@
     <div class="bh-inicio__grid">
       @for(tarjeta of tarjetas; track tarjeta.numeroTarjeta) {
       <panel
-        [titulo]="'Tarjeta'"
+      h  [titulo]="'Tarjeta'"
         [info]="'**** **** **** ' + tarjeta.numeroTarjeta.slice(-4)"
         [routerLinkVer]="'/tarjetas/' + tarjeta.numeroTarjeta"
       >

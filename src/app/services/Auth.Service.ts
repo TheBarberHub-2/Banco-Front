@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = '/auth/login';
+  private apiUrl = 'http://greatbank-back.producciondaw.cip.fpmislata.com/auth/login';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   logout() {
-    this.http.delete('/auth/logout').subscribe({
+    this.http.delete('http://greatbank-back.producciondaw.cip.fpmislata.com/auth/logout').subscribe({
       next: () => {
         localStorage.removeItem('token');
         localStorage.removeItem('login');
@@ -43,7 +43,6 @@ export class AuthService {
       },
       error: (err) => {
         console.error('Logout error:', err);
-        // Still clear local data and redirect even if server call fails
         localStorage.removeItem('token');
         localStorage.removeItem('login');
         this.router.navigate(['/login']);

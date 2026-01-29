@@ -31,7 +31,7 @@ export interface PagoTarjetaRequest {
     providedIn: 'root',
 })
 export class OperacionesService {
-    private apiUrl = '/api';
+    private apiUrl = 'http://greatbank-back.producciondaw.cip.fpmislata.com/api';
 
     constructor(private http: HttpClient) { }
 

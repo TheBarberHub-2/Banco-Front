@@ -5,9 +5,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ClienteService {
-  private apiUrl = '/api/clientes';
+  private apiUrl = 'http://greatbank-back.producciondaw.cip.fpmislata.com/api/clientes';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getApiTokenByLogin(login: string) {
     return this.http.get<{ login: string; apiToken: string }>(`${this.apiUrl}/token`, {

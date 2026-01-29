@@ -8,8 +8,8 @@ import { Cliente } from '../models/cliente/cliente';
     providedIn: 'root'
 })
 export class CuentasService {
-    private apiUrl = '/api/cuentas';
-    private clienteUrl = '/api/clientes';
+    private apiUrl = 'http://greatbank-back.producciondaw.cip.fpmislata.com/api/cuentas';
+    private clienteUrl = 'http://greatbank-back.producciondaw.cip.fpmislata.com/api/clientes';
 
     constructor(private http: HttpClient) { }
 

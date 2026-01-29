@@ -7,7 +7,7 @@ import { movimientoBancario } from '../models/movimiento-bancario/movimientoBanc
     providedIn: 'root'
 })
 export class MovimientosService {
-    private apiUrl = '/api/movimientos';
+    private apiUrl = 'http://greatbank-back.producciondaw.cip.fpmislata.com/api/movimientos';
 
     constructor(private http: HttpClient) { }
 

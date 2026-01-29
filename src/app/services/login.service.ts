@@ -8,9 +8,9 @@ import { ClienteService } from './Cliente.Service';
   providedIn: 'root',
 })
 export class LoginService {
-  constructor(private http: HttpClient, private clienteService: ClienteService) {}
+  constructor(private http: HttpClient, private clienteService: ClienteService) { }
 
-  private apiUrl = '/auth';
+  private apiUrl = 'http://greatbank-back.producciondaw.cip.fpmislata.com/auth';
 
   logIn(credentials: LogIn): Observable<void> {
     return this.http.post<{ token: string }>(this.apiUrl + '/login', credentials).pipe(
@@ -22,7 +22,7 @@ export class LoginService {
       tap((cliente) => {
         localStorage.setItem('apiToken', cliente.apiToken);
       }),
-      map(() => {})
+      map(() => { })
     );
   }
 }
