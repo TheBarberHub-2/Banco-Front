@@ -10,7 +10,7 @@ import { ClienteService } from './Cliente.Service';
 export class LoginService {
   constructor(private http: HttpClient, private clienteService: ClienteService) { }
 
-  private apiUrl = 'http://greatbank-back.producciondaw.cip.fpmislata.com/auth';
+  private apiUrl = 'http://greatbank-back.producciondaw.cip.fpmislata.com/api/auth';
 
   logIn(credentials: LogIn): Observable<void> {
     return this.http.post<{ token: string }>(this.apiUrl + '/login', credentials).pipe(
