@@ -1,12 +1,12 @@
 {
     "/api": {
-        "target": "http://greatbank-back.preproducciondaw.cip.fpmislata.com",
+        "target": "http://greatbank-back.producciondaw.cip.fpmislata.com",
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug"
     },
     "/auth": {
-        "target": "http://greatbank-back.preproducciondaw.cip.fpmislata.com",
+        "target": "http://greatbank-back.producciondaw.cip.fpmislata.com",
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug"
