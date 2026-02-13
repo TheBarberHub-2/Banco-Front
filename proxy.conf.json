@@ -1,12 +1,12 @@
 {
     "/api": {
-        "target": "http://localhost:8081",
+        "target": "http://producciondaw.cip.fpmislata.com",
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug"
     },
     "/auth": {
-        "target": "http://localhost:8081",
+        "target": "http://producciondaw.cip.fpmislata.com",
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug"
