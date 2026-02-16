@@ -23,7 +23,6 @@ export class Transferencia implements OnInit {
   successMessage: string | null = null;
   errorMessage: string | null = null;
 
-  // Pattern from backend: ^ES\d{2}(?:\s?\d{4}){5}$
   private ibanPattern = /^ES\d{2}(?:\s?\d{4}){5}$/;
 
   constructor(
@@ -125,7 +124,6 @@ export class Transferencia implements OnInit {
       error: (err) => {
         this.loading = false;
         console.error('Error processing transfer', err);
-        // Extract diagnostic message from backend if available
         this.errorMessage =
           err.error?.error ||
           err.error?.message ||

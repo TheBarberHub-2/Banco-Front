@@ -53,15 +53,12 @@ export class CCuenta implements OnInit {
       return;
     }
 
-    // Get client profile to get clienteId
     this.cuentasService.getClienteProfile(login).subscribe({
       next: (response: any) => {
         const cliente = Array.isArray(response) ? response[0] : response;
         if (cliente && cliente.id) {
-          // Get all accounts for this client
           this.cuentasService.getCuentasByCliente(cliente.id).subscribe({
             next: (cuentas: cuentaBancaria[]) => {
-              // Find the specific account by ID
               const processedCuentas = Array.isArray(cuentas)
                 ? cuentas
                 : (cuentas as any).data || [];

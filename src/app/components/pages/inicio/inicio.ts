@@ -52,7 +52,6 @@ export class Inicio implements OnInit {
         this.cuentas = Array.isArray(cuentas) ? cuentas : (cuentas as any).data || [];
         console.log('Processed cuentas:', this.cuentas);
 
-        // Fetch cards for each account to populate the tarjetas list
         this.tarjetas = [];
         this.cuentas.forEach(cuenta => {
           if (cuenta.id) {
