@@ -1,111 +1,88 @@
-<div class="bh-transfer-container">
-  <header class="bh-transfer-header">
-    <div class="bh-transfer-header__back" routerLink="/inicio">
+<div class="bh-transfer">
+  <header class="bh-transfer__header">
+    <div class="bh-transfer__back" routerLink="/inicio">
       <i class="bi bi-arrow-left"></i> Volver al inicio
     </div>
-    <h1 class="bh-transfer-header__title">Nueva Transferencia</h1>
+    <h1 class="bh-transfer__title">Nueva Transferencia</h1>
   </header>
 
-  <main class="bh-transfer-content">
+  <main class="bh-transfer__content">
     @if (successMessage) {
-    <div class="bh-alert bh-alert--success">
+    <div class="bh-transfer__alert bh-transfer__alert--success">
       <i class="bi bi-check-circle-fill"></i>
-      <p>{{ successMessage }}</p>
+      <p class="bh-transfer__alert-text">{{ successMessage }}</p>
     </div>
     } @if (errorMessage) {
-    <div class="bh-alert bh-alert--error">
+    <div class="bh-transfer__alert bh-transfer__alert--error">
       <i class="bi bi-exclamation-triangle-fill"></i>
-      <p>{{ errorMessage }}</p>
+      <p class="bh-transfer__alert-text">{{ errorMessage }}</p>
     </div>
     }
 
-    <form [formGroup]="transferForm" (ngSubmit)="onSubmit()" class="bh-transfer-form">
+    <form [formGroup]="transferForm" (ngSubmit)="onSubmit()" class="bh-transfer__form">
       <!-- Origen -->
-      <div class="bh-form-group">
-        <label class="bh-form-label">Cuenta de origen</label>
-        <div class="bh-form-static-text">
+      <div class="bh-transfer__group">
+        <label class="bh-transfer__label">Cuenta de origen</label>
+        <div class="bh-transfer__static-text">
           <span>{{ iban }}</span>
         </div>
       </div>
 
       <!-- Destino -->
-      <div class="bh-form-group">
-        <label for="destinoIban" class="bh-form-label">Número de cuenta destino (IBAN)</label>
-        <input
-          type="text"
-          id="destinoIban"
-          formControlName="destinoIban"
-          class="bh-form-control"
-          placeholder="ES00 0000 0000 0000 0000 0000"
-          [ngClass]="{
-            'bh-form-control--invalid':
+      <div class="bh-transfer__group">
+        <label for="destinoIban" class="bh-transfer__label">Número de cuenta destino (IBAN)</label>
+        <input type="text" id="destinoIban" formControlName="destinoIban" class="bh-transfer__control"
+          placeholder="ES00 0000 0000 0000 0000 0000" [ngClass]="{
+            'bh-transfer__control--invalid':
               transferForm.get('destinoIban')?.touched && transferForm.get('destinoIban')?.invalid
-          }"
-        />
+          }" />
         @if (transferForm.get('destinoIban')?.touched && transferForm.get('destinoIban')?.invalid) {
-        <span class="bh-form-error">Introduce un IBAN español válido (ES... y 22 dígitos).</span>
+        <span class="bh-transfer__error">Introduce un IBAN español válido (ES... y 22 dígitos).</span>
         }
       </div>
 
       <!-- Importe -->
-      <div class="bh-form-group">
-        <label for="importe" class="bh-form-label">Importe (€)</label>
-        <input
-          type="number"
-          id="importe"
-          formControlName="importe"
-          class="bh-form-control"
-          placeholder="0.00"
-          step="0.01"
-          [ngClass]="{
-            'bh-form-control--invalid':
+      <div class="bh-transfer__group">
+        <label for="importe" class="bh-transfer__label">Importe (€)</label>
+        <input type="number" id="importe" formControlName="importe" class="bh-transfer__control" placeholder="0.00"
+          step="0.01" [ngClass]="{
+            'bh-transfer__control--invalid':
               transferForm.get('importe')?.touched && transferForm.get('importe')?.invalid
-          }"
-        />
+          }" />
         @if (transferForm.get('importe')?.touched &&
         transferForm.get('importe')?.errors?.['required']) {
-        <span class="bh-form-error">El importe es obligatorio.</span>
+        <span class="bh-transfer__error">El importe es obligatorio.</span>
         } @if (transferForm.get('importe')?.touched && transferForm.get('importe')?.errors?.['min'])
         {
-        <span class="bh-form-error">El importe mínimo es 0.01€.</span>
+        <span class="bh-transfer__error">El importe mínimo es 0.01€.</span>
         }
       </div>
 
       <!-- Concepto -->
-      <div class="bh-form-group">
-        <label for="concepto" class="bh-form-label">Concepto</label>
-        <input
-          type="text"
-          id="concepto"
-          formControlName="concepto"
-          class="bh-form-control"
-          placeholder="Ej. Pago alquiler"
-          [ngClass]="{
-            'bh-form-control--invalid':
+      <div class="bh-transfer__group">
+        <label for="concepto" class="bh-transfer__label">Concepto</label>
+        <input type="text" id="concepto" formControlName="concepto" class="bh-transfer__control"
+          placeholder="Ej. Pago alquiler" [ngClass]="{
+            'bh-transfer__control--invalid':
               transferForm.get('concepto')?.touched && transferForm.get('concepto')?.invalid
-          }"
-        />
+          }" />
         @if (transferForm.get('concepto')?.touched &&
         transferForm.get('concepto')?.errors?.['required']) {
-        <span class="bh-form-error">El concepto es obligatorio.</span>
+        <span class="bh-transfer__error">El concepto es obligatorio.</span>
         } @if (transferForm.get('concepto')?.touched &&
         transferForm.get('concepto')?.errors?.['minlength']) {
-        <span class="bh-form-error">El concepto debe tener al menos 3 caracteres.</span>
+        <span class="bh-transfer__error">El concepto debe tener al menos 3 caracteres.</span>
         }
       </div>
 
-      <div class="bh-transfer-actions">
-        <button
-          type="button"
-          class="bh-btn bh-btn--secondary"
-          routerLink="/inicio"
-          [disabled]="loading"
-        >
+      <div class="bh-transfer__actions">
+        <button type="button" class="bh-transfer__btn bh-transfer__btn--secondary" routerLink="/inicio"
+          [disabled]="loading">
           Cancelar
         </button>
-        <button type="submit" class="bh-btn bh-btn--primary" [disabled]="loading">
+        <button type="submit" class="bh-transfer__btn bh-transfer__btn--primary" [disabled]="loading">
           @if (loading) {
-          <span class="bh-spinner"></span> Procesando... } @else { Confirmar Transferencia }
+          <span class="bh-transfer__spinner"></span> Procesando... } @else { Confirmar Transferencia }
         </button>
       </div>
     </form>
