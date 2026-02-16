@@ -1,79 +1,77 @@
-.c-cerrar-sesion-container {
-    --c-mod-container-height: var(--bh-altura-1);
-    --c-mod-container-width: var(--bh-w-13);
-    --c-mod-container-color-fondo: var(--bh-color-gris-9);
-    --c-mod-container-color-superficie: var(--bh-color-blanco);
-    --c-mod-container-color-texto-primario: var(--bh-color-azul-2);
-    --c-mod-container-color-texto-secundario: var(--bh-color-gris-5);
+.c-cerrar-sesion {
+    --c-cerrar-bg: var(--bh-color-gris-9);
+    --c-cerrar-surface: var(--bh-color-blanco);
+    --c-cerrar-text-primary: var(--bh-color-azul-2);
+    --c-cerrar-text-secondary: var(--bh-color-gris-5);
 
-    background-color: var(--c-mod-container-color-fondo);
+    background-color: var(--c-cerrar-bg);
     min-height: 100vh;
-    max-width: var(--c-mod-container-width);
+    max-width: var(--bh-w-13);
     margin: 0 auto;
     padding: var(--bh-p-4);
 
-    .form-wrapper {
-        background: var(--c-mod-container-color-superficie);
+    &__form {
+        background: var(--c-cerrar-surface);
         padding: var(--bh-p-6);
         border-radius: var(--bh-radio-2);
         box-shadow: var(--bh-sombra-1);
-
-        h2 {
-            margin-bottom: var(--bh-p-4);
-            color: var(--c-mod-container-color-texto-primario);
-            font-size: var(--bh-texto-2);
-            border-bottom: 2px solid var(--bh-color-primario);
-            padding-bottom: var(--bh-p-2);
-        }
     }
 
-    .form-actions {
+    &__title {
+        margin-bottom: var(--bh-p-4);
+        color: var(--c-cerrar-text-primary);
+        font-size: var(--bh-texto-2);
+        border-bottom: 2px solid var(--bh-color-primario);
+        padding-bottom: var(--bh-p-2);
+    }
+
+    &__actions {
         display: flex;
         gap: var(--bh-p-2);
         justify-content: flex-end;
         margin-top: var(--bh-p-4);
+    }
 
-        button {
-            padding: var(--bh-p-2) var(--bh-p-4);
-            border-radius: var(--bh-radio-1);
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s ease;
+    &__button {
+        padding: var(--bh-p-2) var(--bh-p-4);
+        border-radius: var(--bh-radio-1);
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s ease;
 
-            &.btn-submit {
-                background-color: var(--bh-color-azul-2);
-                color: white;
+        &--submit {
+            background-color: var(--bh-color-azul-2);
+            color: white;
 
-                &:hover {
-                    background-color: var(--bh-color-azul-6);
-                    transform: translateY(-2px);
-                    box-shadow: var(--bh-sombra-2);
-                }
+            &:hover {
+                background-color: var(--bh-color-azul-6);
+                transform: translateY(-2px);
+                box-shadow: var(--bh-sombra-2);
             }
+        }
 
-            &.btn-cancel {
-                background-color: transparent;
-                border: 1px solid var(--bh-color-gris-5);
-                color: var(--c-mod-container-color-texto-primario);
+        &--cancel {
+            background-color: transparent;
+            border: 1px solid var(--bh-color-gris-5);
+            color: var(--c-cerrar-text-primary);
 
-                &:hover {
-                    background-color: var(--bh-color-gris-3);
-                }
+            &:hover {
+                background-color: var(--bh-color-gris-3);
             }
         }
     }
 
-    .no-data {
+    &__no-data {
         text-align: center;
         padding: var(--bh-p-4);
-        background: var(--c-mod-container-color-superficie);
+        background: var(--c-cerrar-surface);
         border-radius: var(--bh-radio-2);
+    }
 
-        p {
-            color: var(--c-mod-container-color-texto-primario);
-            font-size: var(--bh-texto-4);
-            margin-bottom: var(--bh-p-2);
-        }
+    &__description {
+        color: var(--c-cerrar-text-primary);
+        font-size: var(--bh-texto-4);
+        margin-bottom: var(--bh-p-2);
     }
 }

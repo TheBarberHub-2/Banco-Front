@@ -1,13 +1,13 @@
-<div class="form-wrapper">
-  <h2>Login</h2>
-  <form>
-    <div class="form-group">
-      <input name="login" type="text" required [(ngModel)]="login.login" placeholder="Usuario" />
+<div class="c-login">
+  <h2 class="c-login__title">Login</h2>
+  <form class="c-login__form">
+    <div class="c-login__group">
+      <input class="c-login__input" name="login" type="text" required [(ngModel)]="login.login" placeholder="Usuario" />
     </div>
-    <div class="form-group">
-      <input name="password" type="password" required [(ngModel)]="login.password" placeholder="Contraseña" />
+    <div class="c-login__group">
+      <input class="c-login__input" name="password" type="password" required [(ngModel)]="login.password"
+        placeholder="Contraseña" />
     </div>
-    <button class="btn btn-primary bh--w-10 bh--p-4 bh--color-fondo-azul-5 bh--radio-1"
-      (click)="onSubmitLogin()">Entrar</button>
+    <button class="c-login__button" (click)="onSubmitLogin()">Entrar</button>
   </form>
 </div>
